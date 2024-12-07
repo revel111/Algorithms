@@ -1,6 +1,10 @@
 import java.util.*;
 
-public class Main {
+/**
+ * Some algorithms from the book named "Grokking Algorithms" by Aditya Y. Bhargava.
+ */
+
+public class GrokkingAlgorithms {
     public static void main(String[] args) {
         List<Integer> binaryList = Arrays.asList(1, 5, 6, 8, 10, 15, 40);
         List<Integer> notSorted = Arrays.asList(45, 2, 10, -100, 34, 500, 40);

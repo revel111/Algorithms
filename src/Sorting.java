@@ -2,6 +2,9 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
+/**
+ * This file contains ones of the most popular sorting algorithms.
+ */
 public class Sorting {
     public static void main(String[] args) {
         List<Integer> notSorted = Arrays.asList(45, 2, 10, -100, 34, 500, 40);
