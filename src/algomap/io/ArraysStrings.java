@@ -2,6 +2,7 @@ package algomap.io;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Comparator;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -16,6 +17,7 @@ public class ArraysStrings {
         System.out.println(maxProfit(array));
         System.out.println(Arrays.toString(new String[]{"flower", "flow", "flight"}));
         System.out.println(summaryRanges(array));
+        System.out.println(Arrays.toString(productExceptSelf(array)));
     }
 
     public static int findClosestNumberToZero(int[] nums) {
@@ -144,5 +146,92 @@ public class ArraysStrings {
         }
 
         return result;
+    }
+
+    public static int[] productExceptSelf(int[] nums) {
+        int length = nums.length;
+        int[] res = new int[length];
+        int left = 1;
+        int right = 1;
+
+        for (int i = 0; i < length; i++) {
+            res[i] = left;
+            left *= nums[i];
+        }
+
+        for (int i = length - 1; i >= 0; i--) {
+            res[i] *= right;
+            right *= nums[i];
+        }
+
+        return res;
+    }
+
+    public static int[][] merge(int[][] intervals) {
+        List<int[]> res = new ArrayList<>();
+        Arrays.sort(intervals, Comparator.comparingInt(a -> a[0]));
+
+        for (int[] interval : intervals) {
+            if (res.isEmpty() || res.get(res.size() - 1)[1] < interval[0]) {
+                res.add(interval);
+            } else {
+                res.get(res.size() - 1)[1] = Math.max(res.get(res.size() - 1)[1], interval[1]);
+            }
+        }
+
+        return res.toArray(new int[res.size()][]);
+    }
+
+    public enum DIR {
+        RIGHT,
+        LEFT,
+        UP,
+        DOWN
+    }
+
+    public List<Integer> spiralOrder(int[][] matrix) {
+        List<Integer> res = new ArrayList<>();
+        DIR dir = DIR.RIGHT;
+        int leftBound = -1, rightBound = matrix[0].length, downBound = matrix.length, upperBound = 0;
+        int i = 0, j = 0;
+
+        while (res.size() != matrix[0].length * matrix.length) {
+            switch(dir) {
+                case DIR.RIGHT -> {
+                    while (j < rightBound)
+                        res.add(matrix[i][j++]);
+                    rightBound--;
+                    i++;
+                    j--;
+                    dir = DIR.DOWN;
+                }
+                case DIR.LEFT -> {
+                    while (j > leftBound)
+                        res.add(matrix[i][j--]);
+                    leftBound++;
+                    i--;
+                    j++;
+                    dir = DIR.UP;
+                }
+                case DIR.UP -> {
+                    while (i > upperBound)
+                        res.add(matrix[i--][j]);
+                    upperBound++;
+                    i++;
+                    j++;
+                    dir = DIR.RIGHT;
+                }
+                case DIR.DOWN -> {
+                    while (i < downBound)
+                        res.add(matrix[i++][j]);
+                    downBound--;
+                    i--;
+                    j--;
+                    dir = DIR.LEFT;
+                }
+            }
+        }
+
+        return res;
     }
 }
