@@ -19,6 +19,8 @@ public class HashmapsSets {
 
     }
 
+    // Problem 771
+    // https://leetcode.com/problems/jewels-and-stones/
     public static int numJewelsInStones(String jewels, String stones) {
         List<String> stonesSet = new ArrayList<>(List.of(stones.split("")));
 
@@ -27,6 +29,8 @@ public class HashmapsSets {
         return stonesSet.size();
     }
 
+    // Problem 217
+    // https://leetcode.com/problems/contains-duplicate/
     public static boolean containsDuplicate(int[] nums) {
         Set<Integer> checked = new HashSet<>();
 
@@ -40,6 +44,8 @@ public class HashmapsSets {
         return false;
     }
 
+    // Problem 383
+    // https://leetcode.com/problems/ransom-note/
     public static boolean canConstruct(String ransomNote, String magazine) {
         Map<Character, Integer> map = new HashMap<>();
         for (char current : magazine.toCharArray())
@@ -60,6 +66,8 @@ public class HashmapsSets {
         return true;
     }
 
+    // Problem 383
+    // https://leetcode.com/problems/valid-anagram/
     public static boolean isAnagram(String s, String t) {
         Map<Character, Integer> map1 = fill(s);
         Map<Character, Integer> map2 = fill(t);
@@ -75,4 +83,24 @@ public class HashmapsSets {
 
         return map;
     }
+
+    // Problem 1
+    // https://leetcode.com/problems/two-sum/
+    public int[] twoSum(int[] nums, int target) {
+        Map<Integer, Integer> map = new HashMap<>();
+
+        for(int i = 0; i < nums.length; i++)
+            map.put(nums[i], i);
+
+        for(int i = 0; i < nums.length; i++) {
+            int x = target - nums[i];
+
+            if (map.containsKey(x) && map.get(x) != i)
+                return new int[] {i, map.get(x)};
+        }
+
+        return new int[]{};
+    }
+
+
 }

@@ -20,6 +20,8 @@ public class ArraysStrings {
         System.out.println(Arrays.toString(productExceptSelf(array)));
     }
 
+    // Problem 2239
+    // https://leetcode.com/problems/find-closest-number-to-zero/
     public static int findClosestNumberToZero(int[] nums) {
         int closest = nums[0];
 
@@ -35,6 +37,8 @@ public class ArraysStrings {
         return closest;
     }
 
+    // Problem 1768
+    // https://leetcode.com/problems/merge-strings-alternately/
     public static String mergeAlternately(String word1, String word2) {
         StringBuilder sb = new StringBuilder();
 
@@ -48,6 +52,8 @@ public class ArraysStrings {
         return sb.toString();
     }
 
+    // Problem 13
+    // https://leetcode.com/problems/roman-to-integer/
     public static int romanToInt(String s) {
         int result = 0;
 
@@ -76,6 +82,8 @@ public class ArraysStrings {
         return result;
     }
 
+    // Problem 392
+    // https://leetcode.com/problems/is-subsequence/
     public static boolean isSubsequence(String s, String t) {
         int counter = 0;
 
@@ -90,6 +98,8 @@ public class ArraysStrings {
         return counter == s.length();
     }
 
+    // Problem 121
+    // https://leetcode.com/problems/best-time-to-buy-and-sell-stock/
     public static int maxProfit(int[] prices) {
         int lowest = prices[0];
         int profit = 0;
@@ -106,6 +116,8 @@ public class ArraysStrings {
         return profit;
     }
 
+    // Problem 14
+    // https://leetcode.com/problems/longest-common-prefix
     public static String longestCommonPrefix(String[] strs) {
         if (strs.length == 0)
             return "";
@@ -129,6 +141,8 @@ public class ArraysStrings {
         return strs[0].substring(0, i);
     }
 
+    // Problem 228
+    // https://leetcode.com/problems/summary-ranges/
     public static List<String> summaryRanges(int[] nums) {
         List<String> result = new ArrayList<>();
 
@@ -148,6 +162,8 @@ public class ArraysStrings {
         return result;
     }
 
+    // Problem 228
+    // https://leetcode.com/problems/product-of-array-except-self/
     public static int[] productExceptSelf(int[] nums) {
         int length = nums.length;
         int[] res = new int[length];
@@ -167,6 +183,8 @@ public class ArraysStrings {
         return res;
     }
 
+    // Problem 14
+    // https://leetcode.com/problems/merge-intervals/
     public static int[][] merge(int[][] intervals) {
         List<int[]> res = new ArrayList<>();
         Arrays.sort(intervals, Comparator.comparingInt(a -> a[0]));
@@ -189,6 +207,8 @@ public class ArraysStrings {
         DOWN
     }
 
+    // Problem 54
+    // https://leetcode.com/problems/spiral-matrix/
     public List<Integer> spiralOrder(int[][] matrix) {
         List<Integer> res = new ArrayList<>();
         DIR dir = DIR.RIGHT;
