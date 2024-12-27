@@ -9,15 +9,15 @@ import java.util.Map;
 
 public class ArraysStrings {
     public static void main(String[] args) {
-        int[] array = {-4, -2, 1, 4, 8};
-        System.out.println(findClosestNumberToZero(array));
-        System.out.println(mergeAlternately("word1", "word2"));
-        System.out.println(romanToInt("XVL"));
-        System.out.println(isSubsequence("str", "hsjjtllr"));
-        System.out.println(maxProfit(array));
-        System.out.println(Arrays.toString(new String[]{"flower", "flow", "flight"}));
-        System.out.println(summaryRanges(array));
-        System.out.println(Arrays.toString(productExceptSelf(array)));
+//        int[] array = {-4, -2, 1, 4, 8};
+//        System.out.println(findClosestNumberToZero(array));
+//        System.out.println(mergeAlternately("word1", "word2"));
+//        System.out.println(romanToInt("XVL"));
+//        System.out.println(isSubsequence("str", "hsjjtllr"));
+//        System.out.println(maxProfit(array));
+//        System.out.println(Arrays.toString(new String[]{"flower", "flow", "flight"}));
+//        System.out.println(summaryRanges(array));
+//        System.out.println(Arrays.toString(productExceptSelf(array)));
     }
 
     // Problem 2239

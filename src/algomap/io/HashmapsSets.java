@@ -12,11 +12,10 @@ import java.util.stream.Collectors;
 
 public class HashmapsSets {
     public static void main(String[] args) {
-        System.out.println(numJewelsInStones("ad", "asdada"));
-        System.out.println(containsDuplicate(new int[]{1, 2, 3, 4}));
-        System.out.println(canConstruct("aa", "ab"));
-        System.out.println(isAnagram("anagram", "nagaram"));
-
+//        System.out.println(numJewelsInStones("ad", "asdada"));
+//        System.out.println(containsDuplicate(new int[]{1, 2, 3, 4}));
+//        System.out.println(canConstruct("aa", "ab"));
+//        System.out.println(isAnagram("anagram", "nagaram"));
     }
 
     // Problem 771
@@ -102,5 +101,65 @@ public class HashmapsSets {
         return new int[]{};
     }
 
+    // Problem 49
+    // https://leetcode.com/problems/group-anagrams/
+    public List<List<String>> groupAnagrams(String[] strs) {
+        Map<String, List<String>> map = new HashMap<>();
 
+        for (String s : strs) {
+            char[] charArray = s.toCharArray();
+            Arrays.sort(charArray);
+            String sortedS = new String(charArray);
+
+            map.putIfAbsent(sortedS, new ArrayList<>());
+            map.get(sortedS).add(s);
+        }
+
+        return new ArrayList<>(map.values());
+    }
+
+    // Problem 169
+    // https://leetcode.com/problems/majority-element/
+    public int majorityElement(int[] nums) {
+        int max = 0, currentMax = 0;
+        int sMax = 0, sCurrentMax = 0;
+
+        Arrays.sort(nums);
+        for (int num : nums) {
+            if (num != sCurrentMax) {
+                currentMax = 0;
+                sCurrentMax = num;
+            }
+
+            if (++currentMax > max) {
+                max = currentMax;
+                sMax = sCurrentMax;
+            }
+        }
+
+        return sMax;
+    }
+
+    // Problem 128
+    // https://leetcode.com/problems/longest-consecutive-sequence
+    public int longestConsecutive(int[] nums) {
+        int counter = 0, currentCounter = 0, previous = Integer.MIN_VALUE;
+
+        Arrays.sort(nums);
+        for (int num : nums) {
+            if (num - 1 == previous)
+                currentCounter++;
+            else if (num == previous)
+                continue;
+            else
+                currentCounter = 1;
+
+            if (currentCounter > counter)
+                counter = currentCounter;
+
+            previous = num;
+        }
+
+        return counter;
+    }
 }
