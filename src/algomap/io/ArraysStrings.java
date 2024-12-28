@@ -117,7 +117,7 @@ public class ArraysStrings {
     }
 
     // Problem 14
-    // https://leetcode.com/problems/longest-common-prefix
+    // https://leetcode.com/problems/longest-common-prefix/
     public static String longestCommonPrefix(String[] strs) {
         if (strs.length == 0)
             return "";
