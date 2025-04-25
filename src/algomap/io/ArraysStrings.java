@@ -4,8 +4,10 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Comparator;
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 
 public class ArraysStrings {
     public static void main(String[] args) {
@@ -216,7 +218,7 @@ public class ArraysStrings {
         int i = 0, j = 0;
 
         while (res.size() != matrix[0].length * matrix.length) {
-            switch(dir) {
+            switch (dir) {
                 case DIR.RIGHT -> {
                     while (j < rightBound)
                         res.add(matrix[i][j++]);
@@ -254,4 +256,24 @@ public class ArraysStrings {
 
         return res;
     }
+
+    // Problem 3
+    // https://leetcode.com/problems/longest-substring-without-repeating-characters/
+//    public static int lengthOfLongestSubstring(String s) {
+//        int best = 0, start = 0;
+//        Set<Character> prev = new HashSet<>();
+//
+//        for (int i = 0; i < s.length(); i++) {
+//            if (prev.contains(s.charAt(i))) {
+//                prev.clear();
+//            }
+//
+//            prev.add(s.charAt(i));
+//            if (prev.size() > best) {
+//                best = prev.size();
+//            }
+//        }
+//
+//        return best;
+//    }
 }

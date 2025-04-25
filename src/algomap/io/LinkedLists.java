@@ -4,9 +4,11 @@ package algomap.io;
 public class LinkedLists {
     public static void main(String[] args) {
         ListNode l1 = new ListNode(1, new ListNode(2, new ListNode(3)));
+        ListNode l2 = new ListNode(5, new ListNode(3, new ListNode(9)));
 //        deleteDuplicates(l1);
 //        reverseList(l1);
-        mergeTwoLists(l1, new ListNode(2, new ListNode(4, new ListNode(5))));
+//        mergeTwoLists(l1, new ListNode(2, new ListNode(4, new ListNode(5))));
+//        addTwoNumbers(l1, l2);
     }
 
     private static class ListNode {
@@ -139,5 +141,42 @@ public class LinkedLists {
         back.next = back.next.next;
 
         return dummy.next;
+    }
+
+    // Problem 2
+    // https://leetcode.com/problems/add-two-numbers/
+    public static ListNode addTwoNumbers(ListNode l1, ListNode l2) {
+        ListNode answer = new ListNode();
+        ListNode current = answer;
+
+        int extra = 0;
+        do {
+            int currentValue = extra;
+
+            if (l1 != null) {
+                currentValue += l1.val;
+                l1 = l1.next;
+            }
+
+            if (l2 != null) {
+                currentValue += l2.val;
+                l2 = l2.next;
+            }
+
+            if (currentValue >= 10) {
+                extra = 1;
+                currentValue %= 10;
+            } else {
+                extra = 0;
+            }
+
+            current.next = new ListNode(currentValue);
+            current = current.next;
+        } while (l1 != null || l2 != null);
+
+        if (extra == 1)
+            current.next = new ListNode(1);
+
+        return answer.next;
     }
 }
