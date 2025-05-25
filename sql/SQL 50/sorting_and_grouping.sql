@@ -38,7 +38,7 @@ GROUP BY
 HAVING
     COUNT(DISTINCT student) >= 5;
 	
-https://leetcode.com/problems/find-followers-count/
+-- https://leetcode.com/problems/find-followers-count/
 SELECT
     user_id,
     COUNT(follower_id) as followers_count
