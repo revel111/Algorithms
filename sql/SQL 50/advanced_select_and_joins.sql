@@ -2,8 +2,8 @@
 SELECT
     mgr.employee_id,
     mgr.name,
-    COUNT(emp.employee_id) as reports_count,
-    ROUND(AVG(emp.age)) as average_age
+    COUNT(emp.employee_id) AS reports_count,
+    ROUND(AVG(emp.age)) AS average_age
 FROM
     Employees emp
 JOIN 
@@ -42,7 +42,7 @@ FROM
 	
 -- https://leetcode.com/problems/consecutive-numbers/
 SELECT DISTINCT
-    l1.num as ConsecutiveNums
+    l1.num AS ConsecutiveNums
 FROM
     Logs l1,
     Logs l2,

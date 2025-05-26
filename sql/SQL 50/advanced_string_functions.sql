@@ -4,7 +4,8 @@ SELECT
     UPPER(SUBSTRING(name, 1, 1)) || LOWER(SUBSTRING(name, 2, LENGTH(name))) as name
 FROM
     Users
-ORDER BY user_id;
+ORDER BY 
+	user_id;
 
 -- https://leetcode.com/problems/patients-with-a-condition/
 SELECT 
@@ -12,7 +13,8 @@ SELECT
 FROM
     Patients
 WHERE
-    conditions LIKE '% DIAB1%' OR conditions LIKE 'DIAB1%';
+    conditions LIKE '% DIAB1%' OR
+	conditions LIKE 'DIAB1%';
 	
 -- https://leetcode.com/problems/delete-duplicate-emails/
 DELETE FROM
@@ -20,7 +22,8 @@ DELETE FROM
 USING
     Person p2
 WHERE
-    p1.email = p2.email AND p1.id > p2.id;
+    p1.email = p2.email AND 
+	p1.id > p2.id;
 	
 -- https://leetcode.com/problems/second-highest-salary/
 SELECT ( -- XYETA
@@ -49,7 +52,8 @@ FROM (
     SELECT DISTINCT
         sell_date,
         product
-    FROM Activities
+    FROM 
+		Activities
 )
 GROUP BY
     sell_date

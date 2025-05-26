@@ -1,7 +1,7 @@
 -- https://leetcode.com/problems/number-of-unique-subjects-taught-by-each-teacher/
 SELECT
     teacher_id,
-    COUNT(DISTINCT subject_id) as cnt
+    COUNT(DISTINCT subject_id) AS cnt
 FROM
     Teacher
 GROUP BY
@@ -10,12 +10,14 @@ GROUP BY
 -- https://leetcode.com/problems/user-activity-for-the-past-30-days-i/
 SELECT
     activity_date as day,
-    COUNT(DISTINCT user_id) as active_users
+    COUNT(DISTINCT user_id) AS active_users
 FROM
     Activity
 WHERE
-    activity_date <= '2019-07-27' AND '2019-07-27' - activity_date < 30
-GROUP BY activity_date;
+    activity_date <= '2019-07-27' AND
+	'2019-07-27' - activity_date < 30
+GROUP BY 
+	activity_date;
 
 -- https://leetcode.com/problems/product-sales-analysis-iii/
 SELECT
@@ -26,7 +28,14 @@ SELECT
 FROM
     Sales
 WHERE
-    (product_id, year) IN (SELECT product_id, min(year) FROM Sales GROUP BY product_id);
+    (product_id, year) IN (SELECT 
+								product_id,
+								min(year)
+							FROM 
+								Sales
+							GROUP BY 
+								product_id
+						);
 	
 -- https://leetcode.com/problems/classes-more-than-5-students/
 SELECT
@@ -41,7 +50,7 @@ HAVING
 -- https://leetcode.com/problems/find-followers-count/
 SELECT
     user_id,
-    COUNT(follower_id) as followers_count
+    COUNT(follower_id) AS followers_count
 FROM
     Followers
 GROUP BY
@@ -51,7 +60,7 @@ ORDER BY
 	
 -- https://leetcode.com/problems/biggest-single-number/
 SELECT 
-    MAX(num) as num
+    MAX(num) AS num
 FROM (
     SELECT
         num
