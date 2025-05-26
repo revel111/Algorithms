@@ -1,3 +1,12 @@
+--https://leetcode.com/problems/not-boring-movies/
+SELECT *
+FROM
+    Cinema
+WHERE
+    description != 'boring' AND id % 2 = 1
+ORDER BY
+    rating DESC;
+
 -- https://leetcode.com/problems/average-selling-price/
 SELECT
     p.product_id,
