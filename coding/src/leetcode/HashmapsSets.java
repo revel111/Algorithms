@@ -1,4 +1,4 @@
-package algomap.io;
+package leetcode;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -16,6 +16,7 @@ public class HashmapsSets {
 //        System.out.println(containsDuplicate(new int[]{1, 2, 3, 4}));
 //        System.out.println(canConstruct("aa", "ab"));
 //        System.out.println(isAnagram("anagram", "nagaram"));
+        System.out.println(Arrays.toString(topKFrequent(new int[]{1, 1, 1, 2, 2, 3}, 2)));
     }
 
     // Problem 771
@@ -68,19 +69,23 @@ public class HashmapsSets {
     // Problem 383
     // https://leetcode.com/problems/valid-anagram/
     public static boolean isAnagram(String s, String t) {
-        Map<Character, Integer> map1 = fill(s);
-        Map<Character, Integer> map2 = fill(t);
+        if (s.length() != t.length()) {
+            return false;
+        }
 
-        return map1.equals(map2);
-    }
+        int[] nums = new int[26];
+        for (int i = 0; i < s.length(); i++) {
+            nums[s.charAt(i) - 'a'] += 1;
+            nums[t.charAt(i) - 'a'] -= 1;
+        }
 
-    private static Map<Character, Integer> fill(String s) {
-        Map<Character, Integer> map = new HashMap<>();
+        for (int num : nums) {
+            if (num != 0) {
+                return false;
+            }
+        }
 
-        for(char current : s.toCharArray())
-            map.put(current, map.getOrDefault(current, 0) + 1);
-
-        return map;
+        return true;
     }
 
     // Problem 1
@@ -88,14 +93,14 @@ public class HashmapsSets {
     public int[] twoSum(int[] nums, int target) {
         Map<Integer, Integer> map = new HashMap<>();
 
-        for(int i = 0; i < nums.length; i++)
+        for (int i = 0; i < nums.length; i++)
             map.put(nums[i], i);
 
-        for(int i = 0; i < nums.length; i++) {
+        for (int i = 0; i < nums.length; i++) {
             int x = target - nums[i];
 
             if (map.containsKey(x) && map.get(x) != i)
-                return new int[] {i, map.get(x)};
+                return new int[]{i, map.get(x)};
         }
 
         return new int[]{};
@@ -161,5 +166,37 @@ public class HashmapsSets {
         }
 
         return counter;
+    }
+
+    // Problem 347
+    // https://leetcode.com/problems/top-k-frequent-elements
+    public static int[] topKFrequent(int[] nums, int k) {
+        Map<Integer, Integer> counts = new HashMap<>();
+        List<Integer>[] freqs = new List[nums.length + 1];
+
+        for (int i = 0; i < freqs.length; i++) {
+            freqs[i] = new ArrayList<>();
+        }
+
+        for (int num : nums) {
+            counts.put(num, counts.getOrDefault(num, 0) + 1);
+        }
+
+        for (Map.Entry<Integer, Integer> entry : counts.entrySet()) {
+            freqs[entry.getValue()].add(entry.getKey());
+        }
+
+        int[] answer = new int[k];
+        int counterForK = 0;
+        for (int i = freqs.length - 1; i > 0 && counterForK < k; i--) {
+            for (int num : freqs[i]) {
+                if (counterForK == k) {
+                    return answer;
+                }
+                answer[counterForK++] = num;
+            }
+        }
+
+        return answer;
     }
 }

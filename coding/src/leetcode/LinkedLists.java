@@ -1,4 +1,4 @@
-package algomap.io;
+package leetcode;
 
 
 public class LinkedLists {
