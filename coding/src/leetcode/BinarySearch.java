@@ -8,17 +8,19 @@ public class BinarySearch {
     // Problem 704
     // https://leetcode.com/problems/binary-search/
     public int search(int[] nums, int target) {
-        int i = 0, j = nums.length - 1;
+        int left = 0, right = nums.length - 1;
 
-        while(i <= j) {
-            int mid = (j + i) / 2;
+        while (left <= right) {
+            // int mid = (left + right) / 2;
+            int mid = left + ((right - left) / 2);
 
-            if (nums[mid] == target)
+            if (nums[mid] == target) {
                 return mid;
-            else if (target < nums[mid])
-                j = mid - 1;
-            else
-                i = mid + 1;
+            } else if (nums[mid] < target) {
+                left = mid + 1;
+            } else {
+                right = mid - 1;
+            }
         }
 
         return -1;
@@ -86,5 +88,36 @@ public class BinarySearch {
         return false;
     }
 
+    // Problem 74
+    // https://leetcode.com/problems/search-a-2d-matrix
+    // this is my own долбоёб's developed way, skip this shit.
+    public boolean searchMatrix(int[][] matrix, int target) {
+        int outerLeft = 0, outerRight = matrix.length - 1;
 
+        while (outerLeft <= outerRight) {
+            int outerMid = outerLeft + ((outerRight - outerLeft) / 2);
+            int left = 0, right = matrix[outerMid].length - 1;
+
+            int mid = 0;
+            while (left <= right) {
+                mid = left + ((right - left) / 2);
+
+                if (matrix[outerMid][mid] < target) {
+                    left = mid + 1;
+                } else if (matrix[outerMid][mid] > target) {
+                    right = mid - 1;
+                } else {
+                    return true;
+                }
+            }
+
+            if (target < matrix[outerMid][mid]) {
+                outerRight = outerMid - 1;
+            } else {
+                outerLeft = outerMid + 1;
+            }
+        }
+
+        return false;
+    }
 }

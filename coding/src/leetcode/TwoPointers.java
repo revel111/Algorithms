@@ -1,5 +1,9 @@
 package leetcode;
 
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
+
 public class TwoPointers {
     public static void main(String[] args) {
 
@@ -60,6 +64,37 @@ public class TwoPointers {
         return new int[]{};
     }
 
+    // Problem 15
+    // https://leetcode.com/problems/3sum/
+    public List<List<Integer>> threeSum(int[] nums) {
+        Arrays.sort(nums);
+        List<List<Integer>> result = new ArrayList<>();
+
+        for (int targetIndex = 0; targetIndex < nums.length; targetIndex++) {
+            if (targetIndex > 0 && nums[targetIndex] == nums[targetIndex - 1]) {
+                continue;
+            }
+
+            int left = targetIndex + 1, right = nums.length - 1;
+            while (left < right) {
+                int sum = nums[targetIndex] + nums[right] + nums[left];
+
+                if (sum > 0) {
+                    right--;
+                } else if (sum < 0) {
+                    left++;
+                } else {
+                    result.add(List.of(nums[targetIndex], nums[right], nums[left]));
+                    do {
+                        left++;
+                    } while (nums[left] == nums[left - 1] && left < right);
+                }
+            }
+        }
+
+        return result;
+    }
+
     // Problem 125
     // https://leetcode.com/problems/valid-palindrome/
     public boolean isPalindrome(String s) {
@@ -84,23 +119,20 @@ public class TwoPointers {
     // Problem 11
     // https://leetcode.com/problems/container-with-most-water/
     public int maxArea(int[] height) {
-        int i = 0, j = height.length - 1;
-        int maxArea = 0;
+        int max = 0;
 
-        while (i < j) {
-            int width = j - i;
-            int currentHeight = Math.min(height[i], height[j]);
-            int area = currentHeight * width;
+        int left = 0, right = height.length - 1;
+        while (left < right) {
+            int current = (right - left) * Math.min(height[left], height[right]);
+            max = Math.max(current, max);
 
-            if (area > maxArea)
-                maxArea = area;
-
-            if (height[i] < height[j])
-                i++;
-            else
-                j--;
+            if (height[left] < height[right]) {
+                left++;
+            } else {
+                right--;
+            }
         }
 
-        return maxArea;
+        return max;
     }
 }

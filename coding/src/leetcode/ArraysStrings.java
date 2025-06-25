@@ -98,24 +98,6 @@ public class ArraysStrings {
         return counter == s.length();
     }
 
-    // Problem 121
-    // https://leetcode.com/problems/best-time-to-buy-and-sell-stock/
-    public static int maxProfit(int[] prices) {
-        int lowest = prices[0];
-        int profit = 0;
-
-        for (int i = 1; i < prices.length; i++) {
-            int current = prices[i];
-            if (current < lowest)
-                lowest = current;
-
-            if (current - lowest > profit)
-                profit = current - lowest;
-        }
-
-        return profit;
-    }
-
     // Problem 14
     // https://leetcode.com/problems/longest-common-prefix/
     public static String longestCommonPrefix(String[] strs) {
@@ -165,22 +147,21 @@ public class ArraysStrings {
     // Problem 228
     // https://leetcode.com/problems/product-of-array-except-self/
     public static int[] productExceptSelf(int[] nums) {
-        int length = nums.length;
-        int[] res = new int[length];
-        int left = 1;
-        int right = 1;
+        int[] result = new int[nums.length];
+        int prefix = 1;
 
-        for (int i = 0; i < length; i++) {
-            res[i] = left;
-            left *= nums[i];
+        for (int i = 0; i < nums.length; i++) {
+            result[i] = prefix;
+            prefix *= nums[i];
         }
 
-        for (int i = length - 1; i >= 0; i--) {
-            res[i] *= right;
-            right *= nums[i];
+        int postfix = 1;
+        for (int i = nums.length - 1; i >= 0; i--) {
+            result[i] *= postfix;
+            postfix *= nums[i];
         }
 
-        return res;
+        return result;
     }
 
     // Problem 14
