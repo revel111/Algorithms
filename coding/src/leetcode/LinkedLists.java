@@ -6,7 +6,7 @@ public class LinkedLists {
         ListNode l1 = new ListNode(1, new ListNode(2, new ListNode(3)));
 //        deleteDuplicates(l1);
 //        reverseList(l1);
-        mergeTwoLists(l1, new ListNode(2, new ListNode(4, new ListNode(5))));
+//        mergeTwoLists(l1, new ListNode(2, new ListNode(4, new ListNode(5))));
     }
 
     private static class ListNode {
@@ -123,21 +123,21 @@ public class LinkedLists {
     // https://leetcode.com/problems/remove-nth-node-from-end-of-list/
     // Two pointer approach
     public static ListNode removeNthFromEnd(ListNode head, int n) {
-        ListNode dummy = new ListNode();
-        dummy.next = head;
-        ListNode front = dummy;
-        ListNode back = dummy;
+        ListNode storage = new ListNode(0, head);
+        ListNode slow = storage, fast = head;
 
-        for (int i = 0; i <= n; i++)
-            front = front.next;
-
-        while (front != null) {
-            front = front.next;
-            back = back.next;
+        while (n > 0) {
+            fast = fast.next;
+            n--;
         }
 
-        back.next = back.next.next;
+        while (fast != null) {
+            slow = slow.next;
+            fast = fast.next;
+        }
 
-        return dummy.next;
+        slow.next = slow.next.next;
+
+        return storage.next;
     }
 }

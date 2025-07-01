@@ -2,12 +2,14 @@ package leetcode;
 
 public class BinarySearch {
     public static void main(String[] args) {
-
+//        System.out.println(findMin(new int[] {4, 5, 6, 7, 0, 1, 2}));
+//        System.out.println(searchRotated(new int[]{4, 5, 6, 7, 0, 1, 2}, 0));
+        System.out.println(searchRotated(new int[]{1, 3, 5}, 1));
     }
 
     // Problem 704
     // https://leetcode.com/problems/binary-search/
-    public int search(int[] nums, int target) {
+    public static int search(int[] nums, int target) {
         int left = 0, right = nums.length - 1;
 
         while (left <= right) {
@@ -28,7 +30,7 @@ public class BinarySearch {
 
     // Problem 35
     // https://leetcode.com/problems/search-insert-position/
-    public int searchInsert(int[] nums, int target) {
+    public static int searchInsert(int[] nums, int target) {
         int i = 0, j = nums.length - 1, mid = 0;
 
         while (i <= j) {
@@ -47,7 +49,7 @@ public class BinarySearch {
 
     // Problem 278
     // https://leetcode.com/problems/first-bad-version/
-    public int firstBadVersion(int n) {
+    public static int firstBadVersion(int n) {
         int i = 1, j = n, bad = 1;
 
         while (i <= j) {
@@ -64,13 +66,13 @@ public class BinarySearch {
     }
 
     // MOCK FUNCTION
-    private boolean isBadVersion(int version) {
+    private static boolean isBadVersion(int version) {
         return version >= 1;
     }
 
     // Problem 367
     // https://leetcode.com/problems/valid-perfect-square/
-    public boolean isPerfectSquare(int num) {
+    public static boolean isPerfectSquare(int num) {
         int i = 1, j = num;
 
         while (i <= j) {
@@ -91,7 +93,7 @@ public class BinarySearch {
     // Problem 74
     // https://leetcode.com/problems/search-a-2d-matrix
     // this is my own долбоёб's developed way, skip this shit.
-    public boolean searchMatrix(int[][] matrix, int target) {
+    public static boolean searchMatrix(int[][] matrix, int target) {
         int outerLeft = 0, outerRight = matrix.length - 1;
 
         while (outerLeft <= outerRight) {
@@ -119,5 +121,51 @@ public class BinarySearch {
         }
 
         return false;
+    }
+
+    // Problem 153
+    // https://leetcode.com/problems/find-minimum-in-rotated-sorted-array/
+    public static int findMin(int[] nums) {
+        int left = 0, right = nums.length - 1;
+
+        while (left < right) {
+            int mid = left + (right - left) / 2;
+
+            if (nums[mid] < nums[right]) {
+                right = mid;
+            } else {
+                left = mid + 1;
+            }
+        }
+
+        return nums[left];
+    }
+
+    // Problem 33
+    // https://leetcode.com/problems/search-in-rotated-sorted-array/
+    public static int searchRotated(int[] nums, int target) {
+        int left = 0, right = nums.length - 1;
+
+        while (left <= right) {
+            int mid = left + ((right - left) / 2);
+
+            if (nums[mid] == target) {
+                return mid;
+            } else if (nums[left] <= nums[mid]) {
+                if (nums[mid] < target || target < nums[left]) {
+                    left = mid + 1;
+                } else {
+                    right = mid - 1;
+                }
+            } else {
+                if (nums[mid] > target || target > nums[right]) {
+                    right = mid - 1;
+                } else {
+                    left = mid + 1;
+                }
+            }
+        }
+
+        return -1;
     }
 }
