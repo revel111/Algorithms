@@ -119,6 +119,27 @@ public class LinkedLists {
         return slow;
     }
 
+    // Problem 2095
+    // https://leetcode.com/problems/delete-the-middle-node-of-a-linked-list/
+    public ListNode deleteMiddle(ListNode head) {
+        if (head.next == null)
+            return null;
+
+        ListNode fast = head;
+        ListNode slow = head;
+        ListNode prev = slow;
+
+        while (fast != null && fast.next != null) {
+            prev = slow;
+            slow = slow.next;
+            fast = fast.next.next;
+        }
+
+        prev.next = slow.next;
+
+        return head;
+    }
+
     // Problem 19
     // https://leetcode.com/problems/remove-nth-node-from-end-of-list/
     // Two pointer approach
@@ -137,6 +158,72 @@ public class LinkedLists {
         }
 
         slow.next = slow.next.next;
+
+        return storage.next;
+    }
+
+    // Problem 2
+    // https://leetcode.com/problems/add-two-numbers/
+    // I know it looks ugly(and remainder calculation is a bit redundant), but still it's:
+    // O(1) for space (we don't count storage variable)
+    // O(n) for time where n is size of l1 + size of l2
+    //
+    // tbh I am just proud I solved it, I took a look at a better solution after all.
+    public static ListNode addTwoNumbers(ListNode l1, ListNode l2) {
+        ListNode storage = new ListNode();
+        ListNode current = storage;
+        int remainder = 0;
+
+        while (l1 != null && l2 != null) {
+            int val = remainder + l1.val + l2.val;
+
+            if (val >= 10) {
+                remainder = 1;
+                current.next = new ListNode(val % 10);
+            } else {
+                remainder = 0;
+                current.next = new ListNode(val);
+            }
+
+            current = current.next;
+
+            l1 = l1.next;
+            l2 = l2.next;
+        }
+
+        while (l1 != null) {
+            int val = remainder + l1.val;
+
+            if (val >= 10) {
+                remainder = 1;
+                current.next = new ListNode(val % 10);
+            } else {
+                remainder = 0;
+                current.next = new ListNode(val);
+            }
+            current = current.next;
+
+            l1 = l1.next;
+        }
+
+
+        while (l2 != null) {
+            int val = remainder + l2.val;
+
+            if (val >= 10) {
+                remainder = 1;
+                current.next = new ListNode(val % 10);
+            } else {
+                remainder = 0;
+                current.next = new ListNode(val);
+            }
+            current = current.next;
+
+            l2 = l2.next;
+        }
+
+        if (remainder == 1)
+            current.next = new ListNode(1);
 
         return storage.next;
     }
