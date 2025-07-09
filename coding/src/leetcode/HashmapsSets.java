@@ -2,13 +2,11 @@ package leetcode;
 
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.Collections;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
-import java.util.stream.Collectors;
 
 public class HashmapsSets {
     public static void main(String[] args) {
@@ -16,7 +14,8 @@ public class HashmapsSets {
 //        System.out.println(containsDuplicate(new int[]{1, 2, 3, 4}));
 //        System.out.println(canConstruct("aa", "ab"));
 //        System.out.println(isAnagram("anagram", "nagaram"));
-        System.out.println(Arrays.toString(topKFrequent(new int[]{1, 1, 1, 2, 2, 3}, 2)));
+//        System.out.println(Arrays.toString(topKFrequent(new int[]{1, 1, 1, 2, 2, 3}, 2)));
+        System.out.println(longestConsecutive(new int[]{100, 4, 200, 1, 3, 2}));
     }
 
     // Problem 771
@@ -147,25 +146,26 @@ public class HashmapsSets {
 
     // Problem 128
     // https://leetcode.com/problems/longest-consecutive-sequence
-    public int longestConsecutive(int[] nums) {
-        int counter = 0, currentCounter = 0, previous = Integer.MIN_VALUE;
+    public static int longestConsecutive(int[] nums) {
+        int res = 0;
+        Map<Integer, Integer> storage = new HashMap<>();
 
-        Arrays.sort(nums);
         for (int num : nums) {
-            if (num - 1 == previous)
-                currentCounter++;
-            else if (num == previous)
-                continue;
-            else
-                currentCounter = 1;
+            if (!storage.containsKey(num)) {
+                int left = storage.getOrDefault(num - 1, 0);
+                int right = storage.getOrDefault(num + 1, 0);
 
-            if (currentCounter > counter)
-                counter = currentCounter;
+                int sum = left + right + 1;
 
-            previous = num;
+                res = Math.max(sum, res);
+
+                storage.put(num, sum);
+                storage.put(num - left, sum);
+                storage.put(num + right, sum);
+            }
         }
 
-        return counter;
+        return res;
     }
 
     // Problem 347
