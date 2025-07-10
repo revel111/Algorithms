@@ -1,6 +1,7 @@
-package leetcode;
+package neetcode150;
 
-public class DynamicProgramming {
+public class MathAndGeometry {
     public static void main(String[] args) {
+
     }
 }

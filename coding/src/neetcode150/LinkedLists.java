@@ -1,4 +1,4 @@
-package leetcode;
+package neetcode150;
 
 
 public class LinkedLists {
