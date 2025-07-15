@@ -125,23 +125,23 @@ public class HashmapsSets {
     // Problem 169
     // https://leetcode.com/problems/majority-element/
     public int majorityElement(int[] nums) {
-        int max = 0, currentMax = 0;
-        int sMax = 0, sCurrentMax = 0;
+        int curr = nums[0];
+        int count = 1;
 
-        Arrays.sort(nums);
-        for (int num : nums) {
-            if (num != sCurrentMax) {
-                currentMax = 0;
-                sCurrentMax = num;
+        for (int i = 1; i < nums.length; i++) {
+            if (nums[i] == curr) {
+                count++;
+            } else {
+                count--;
             }
 
-            if (++currentMax > max) {
-                max = currentMax;
-                sMax = sCurrentMax;
+            if (count == 0) {
+                curr = nums[i];
+                count++;
             }
         }
 
-        return sMax;
+        return curr;
     }
 
     // Problem 128
