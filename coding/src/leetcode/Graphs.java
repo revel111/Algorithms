@@ -1,4 +1,4 @@
-package neetcode150;
+package leetcode;
 
 public class Graphs {
     public static void main(String[] args) {

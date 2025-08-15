@@ -1,4 +1,4 @@
-package neetcode150;
+package leetcode;
 
 import java.util.Map;
 import java.util.Stack;
