@@ -101,26 +101,21 @@ public class ArraysStrings {
     // Problem 14
     // https://leetcode.com/problems/longest-common-prefix/
     public static String longestCommonPrefix(String[] strs) {
-        if (strs.length == 0)
-            return "";
-
-        int lowestLength = strs[0].length();
+        int minLength = strs[0].length();
 
         for (int i = 1; i < strs.length; i++) {
-            int current = strs[i].length();
-            if (current < lowestLength)
-                lowestLength = current;
+            minLength = Math.min(minLength, strs[i].length());
         }
 
-        int i;
-        for (i = 0; i < lowestLength; i++) {
+        for (int i = 0; i < minLength; i++) {
             for (int j = 1; j < strs.length; j++) {
-                if (strs[j].charAt(i) != strs[0].charAt(i))
+                if (strs[0].charAt(i) != strs[j].charAt(i)) {
                     return strs[0].substring(0, i);
+                }
             }
         }
 
-        return strs[0].substring(0, i);
+        return strs[0].substring(0, minLength);
     }
 
     // Problem 228
@@ -171,10 +166,10 @@ public class ArraysStrings {
         Arrays.sort(intervals, Comparator.comparingInt(a -> a[0]));
 
         for (int[] interval : intervals) {
-            if (res.isEmpty() || res.get(res.size() - 1)[1] < interval[0]) {
+            if (res.isEmpty() || res.getLast()[1] < interval[0]) {
                 res.add(interval);
             } else {
-                res.get(res.size() - 1)[1] = Math.max(res.get(res.size() - 1)[1], interval[1]);
+                res.getLast()[1] = Math.max(res.getLast()[1], interval[1]);
             }
         }
 
@@ -229,6 +224,26 @@ public class ArraysStrings {
                     i--;
                     j--;
                     dir = DIR.LEFT;
+                }
+            }
+        }
+
+        return res;
+    }
+
+    // Problem 169
+    // https://leetcode.com/problems/majority-element/
+    public int majorityElement(int[] nums) {
+        int count = 1, res = nums[0];
+
+        for (int i = 1; i < nums.length; i++) {
+            if (nums[i] == res) {
+                count++;
+            } else {
+                count--;
+                if (count == 0) {
+                    res = nums[i];
+                    count++;
                 }
             }
         }

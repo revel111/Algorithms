@@ -122,28 +122,6 @@ public class HashmapsSets {
         return new ArrayList<>(map.values());
     }
 
-    // Problem 169
-    // https://leetcode.com/problems/majority-element/
-    public int majorityElement(int[] nums) {
-        int curr = nums[0];
-        int count = 1;
-
-        for (int i = 1; i < nums.length; i++) {
-            if (nums[i] == curr) {
-                count++;
-            } else {
-                count--;
-            }
-
-            if (count == 0) {
-                curr = nums[i];
-                count++;
-            }
-        }
-
-        return curr;
-    }
-
     // Problem 128
     // https://leetcode.com/problems/longest-consecutive-sequence
     public static int longestConsecutive(int[] nums) {

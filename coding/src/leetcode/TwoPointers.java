@@ -153,4 +153,47 @@ public class TwoPointers {
 
         return i;
     }
+
+    // Problem 27
+    // https://leetcode.com/problems/remove-element/
+    public static int removeElement(int[] nums, int val) {
+        int left = 0, right = nums.length - 1, res = 0;
+
+        while (left <= right) {
+            if (nums[left] == val) {
+                int temp = nums[left];
+                nums[left] = nums[right];
+                nums[right] = temp;
+                right--;
+                res++;
+            } else {
+                left++;
+            }
+        }
+
+        return nums.length - res;
+    }
+
+    // Problem 26
+    // https://leetcode.com/problems/remove-duplicates-from-sorted-array/
+
+    // Problem 881
+    // https://leetcode.com/problems/boats-to-save-people
+    public int numRescueBoats(int[] people, int limit) {
+        int left = 0, right = people.length - 1;
+        int res = 0;
+
+        Arrays.sort(people);
+        while (left <= right) {
+            int leftGuy = people[left], rightGuy = people[right];
+
+            if (rightGuy + leftGuy <= limit) {
+                left++;
+            }
+            right--;
+            res++;
+        }
+
+        return res;
+    }
 }
