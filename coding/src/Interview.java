@@ -1,7 +1,5 @@
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Comparator;
-import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
@@ -15,32 +13,34 @@ public class Interview {
     public static void main() {
 //        System.out.println(Arrays.toString(checkRecipeValidity(new String[]{"sugar", "flour"}, new String[]{"sugarflour", "floursugar", "sugar"})));
 
-        Map<String, List<String>> relations = new HashMap<>();
-        relations.put("Inception", Arrays.asList("Interstellar", "The Prestige", "Tenet"));
-        relations.put("Interstellar", Arrays.asList("Inception", "Gravity", "The Martian"));
-        relations.put("The Prestige", Arrays.asList("Inception", "Memento"));
-        relations.put("Tenet", Arrays.asList("Inception", "Dunkirk"));
-        relations.put("Memento", Arrays.asList("The Prestige", "Insomnia"));
-        relations.put("Dunkirk", Arrays.asList("Tenet"));
-        relations.put("Gravity", Arrays.asList("Interstellar"));
-        relations.put("The Martian", Arrays.asList("Interstellar"));
-        relations.put("Insomnia", Arrays.asList("Memento"));
+//        Map<String, List<String>> relations = new HashMap<>();
+//        relations.put("Inception", Arrays.asList("Interstellar", "The Prestige", "Tenet"));
+//        relations.put("Interstellar", Arrays.asList("Inception", "Gravity", "The Martian"));
+//        relations.put("The Prestige", Arrays.asList("Inception", "Memento"));
+//        relations.put("Tenet", Arrays.asList("Inception", "Dunkirk"));
+//        relations.put("Memento", Arrays.asList("The Prestige", "Insomnia"));
+//        relations.put("Dunkirk", Arrays.asList("Tenet"));
+//        relations.put("Gravity", Arrays.asList("Interstellar"));
+//        relations.put("The Martian", Arrays.asList("Interstellar"));
+//        relations.put("Insomnia", Arrays.asList("Memento"));
+//
+//        Map<String, Double> ratings = new HashMap<>();
+//        ratings.put("Inception", 8.8);
+//        ratings.put("Interstellar", 8.6);
+//        ratings.put("The Prestige", 8.5);
+//        ratings.put("Tenet", 7.5);
+//        ratings.put("Memento", 8.4);
+//        ratings.put("Dunkirk", 7.9);
+//        ratings.put("Gravity", 7.7);
+//        ratings.put("The Martian", 8.0);
+//        ratings.put("Insomnia", 7.1);
+//
+//        String givenMovie = "Inception";
+//        int k = 3;
 
-        Map<String, Double> ratings = new HashMap<>();
-        ratings.put("Inception", 8.8);
-        ratings.put("Interstellar", 8.6);
-        ratings.put("The Prestige", 8.5);
-        ratings.put("Tenet", 7.5);
-        ratings.put("Memento", 8.4);
-        ratings.put("Dunkirk", 7.9);
-        ratings.put("Gravity", 7.7);
-        ratings.put("The Martian", 8.0);
-        ratings.put("Insomnia", 7.1);
+//        System.out.println(findKBestMovies(relations, ratings, givenMovie, k));
 
-        String givenMovie = "Inception";
-        int k = 3;
-
-        System.out.println(findKBestMovies(relations, ratings, givenMovie, k));
+        System.out.println(computeBiggestSquare(new int[] {1, 3, 1}));
     }
 
     // Find k movies with the biggest rating relative to a given movie;
@@ -118,7 +118,25 @@ public class Interview {
     }
 
     // Find the biggest square formed by adjacent buildings
-//    public static int computeBiggestSquare(int[] buildings) {
-//
-//    }
+    public static int computeBiggestSquare(int[] buildings) {
+        int left = 0, right = 0;
+        int max = 0, prevHeight = 0;
+
+        while (right < buildings.length) {
+            int leftBuilding = buildings[left], rightBuilding = buildings[right];
+
+            int minHeight = Math.min(leftBuilding, rightBuilding);
+            int width = right - left + 1;
+
+            if (prevHeight < leftBuilding) {
+                left = right;
+            }
+            max = Math.max(max, Math.min(minHeight, width) * Math.min(minHeight, width));
+
+            prevHeight = rightBuilding;
+            right++;
+        }
+
+        return max;
+    }
 }
