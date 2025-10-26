@@ -10,6 +10,8 @@ public class Sorting {
         List<Integer> notSorted = Arrays.asList(45, 2, 10, -100, 34, 500, 40);
         int[] notSortedArray = new int[]{4, 5, 4, 3, 5, 4, 3, 1, 9, 5, 1, 3};
 
+        System.out.println(sortArray(new int[] {45, 2, 10, -100, 34, 500, 40}));
+
         //System.out.println(quickSortFirst(notSorted));
 
         //selectionSort(notSorted);
@@ -159,5 +161,39 @@ public class Sorting {
         int k = partition(array, left, right);
         quickSortSecond(array, left, k - 1);
         quickSortSecond(array, left + 1, right);
+    }
+
+    public static int[] sortArray(int[] nums) {
+        quickSort(nums, 0, nums.length - 1);
+        return nums;
+    }
+
+    private static void quickSort(int[] nums, int left, int right) {
+        if (left >= right) {
+            return;
+        }
+
+        int pivot = nums[left + (right - left) / 2];
+        int i = left, j = right;
+
+        while (i <= j) {
+            while (nums[i] < pivot) {
+                i++;
+            }
+            while (nums[j] > pivot) {
+                j--;
+            }
+
+            if (i <= j) {
+                int temp = nums[i];
+                nums[i] = nums[j];
+                nums[j] = temp;
+                i++;
+                j--;
+            }
+        }
+
+        quickSort(nums, left, j);
+        quickSort(nums, i, right);
     }
 }
