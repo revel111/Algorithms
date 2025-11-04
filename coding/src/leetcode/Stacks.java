@@ -1,11 +1,14 @@
 package leetcode;
 
+import java.util.ArrayDeque;
+import java.util.Deque;
 import java.util.Map;
+import java.util.Objects;
 import java.util.Stack;
 
 public class Stacks {
     public static void main(String[] args) {
-
+        System.out.println(evalRPN(new String[]{"10", "6", "9", "3", "+", "-11", "*", "/", "*", "17", "+", "5", "+"}));
     }
 
     // Problem 20
@@ -16,7 +19,7 @@ public class Stacks {
 
         for (char paran : s.toCharArray()) {
             if (dict.containsKey(paran)) {
-                if (!stack.isEmpty() && dict.get(paran) == stack.peek()) {
+                if (!stack.isEmpty() && Objects.equals(dict.get(paran), stack.peek())) {
                     stack.pop();
                 } else {
                     return false;
@@ -115,5 +118,46 @@ public class Stacks {
         public int getMin() {
             return (int) min;
         }
+    }
+
+    // Problem 150
+    // https://leetcode.com/problems/evaluate-reverse-polish-notation/
+    public static int evalRPN(String[] tokens) {
+        Deque<Integer> numbers = new ArrayDeque<>();
+
+        for (String token : tokens) {
+            if (!Objects.equals(token, "+") && !Objects.equals(token, "-") && !Objects.equals(token, "*") && !Objects.equals(token, "/")) {
+                numbers.push(Integer.parseInt(token));
+            } else {
+                int right = numbers.pop(), left = numbers.pop();
+
+                int answer = switch (token) {
+                    case "+" -> left + right;
+                    case "-" -> left - right;
+                    case "*" -> left * right;
+                    default -> left / right;
+                };
+                numbers.push(answer);
+            }
+        }
+
+        return numbers.pop();
+    }
+
+    // Problem 739
+    // https://leetcode.com/problems/daily-temperatures/
+    public static int[] dailyTemperatures(int[] temperatures) {
+        int[] answer = new int[temperatures.length];
+        Deque<Integer> stack = new ArrayDeque<>();
+
+        for (int i = 0; i < temperatures.length; i++) {
+            while (!stack.isEmpty() && temperatures[stack.peek()] < temperatures[i]) {
+                answer[stack.peek()] = i - stack.peek();
+                stack.pop();
+            }
+            stack.push(i);
+        }
+
+        return answer;
     }
 }
